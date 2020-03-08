@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{tache.nom}}{% endblock %}
+{% block body %}
+    <h2>Modifier la tache: {{tache.nom}}</h2>
+    {{form(form_edit)}}
+
+    <button class="btn btn-primary">
+        <a href="{{path('delete_tache', {'id': tache.id})}}" class="text-white ">
+            Supprimer
+        </a>
+    </button>
+    <button class="btn btn-primary">
+        <a href="{{path('tache',{'id':tache.id})}}" class="text-white ">
+            Retour à la liste des taches >>
+        </a>
+    </button>
+
+{% endblock %}

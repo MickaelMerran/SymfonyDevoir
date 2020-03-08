@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UtilisateurController!{% endblock %}
+
+{% block body %}
+<h1> Liste des utilisateurs </h1>
+    {% if utilisateurs is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Email</th>
+                    <th>Date d'inscription</th>
+                    <th>Tâche</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for utilisateur in utilisateurs %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('un_utilisateur',
+                                        {'id':utilisateur.id}) 
+                                }}">
+                                {{ utilisateur.nom }}
+                            </a>
+                        </td>
+                        <td>{{ utilisateur.prenom }}</td>
+                        <td>{{ utilisateur.email }}</td>
+                        <td>{{utilisateur.getdateInscription().format('Y-m-d H:i:s')}}</td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a aucun utilisateur </p>
+    {% endif %}
+
+    {{ form(form_ajout) }}
+
+{% endblock %}

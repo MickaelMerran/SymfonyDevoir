@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TacheController!{% endblock %}
+
+{% block body %}
+    <h1> Liste des taches </h1>
+    {% if taches is not empty %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Deadline</th>
+                    <th>Utilisateur</th>
+                    <th>Etat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tache in taches %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('une_tache',
+                                        {'id':tache.id}) 
+                                }}">
+                                {{ tache.nom }}
+                            </a>
+                        </td>
+                         <td>{{tache.getdeadline().format('Y-m-d')}}</td> 
+                        <td>{{ tache.utilisateur }}</td>
+                        <td>
+                            {% if tache.etat == false %}
+                                <p>Tache en cours de finalisation<p> 
+                            {% else %}
+                                <p>La tache est fini<p> 
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a aucune tache </p>
+    {% endif %}
+
+    {{ form(form_ajout) }}
+
+{% endblock %}
