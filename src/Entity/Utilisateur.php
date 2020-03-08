@@ -106,30 +106,18 @@ class Utilisateur
         return $this;
     }
 
-    public function getTache(): ?Tache
+    /**
+     * @return Collection|Tache[]
+     */
+    public function getTache(): Collection
     {
         return $this->tache;
     }
 
-    public function setTache(?Tache $tache): self
-    {
-        $this->tache = $tache;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Tache[]
-     */
-    public function getTaches(): Collection
-    {
-        return $this->taches;
-    }
-
     public function addTach(Tache $tache): self
     {
-        if (!$this->taches->contains($tache)) {
-            $this->taches[] = $tache;
+        if (!$this->tache->contains($tache)) {
+            $this->tache[] = $tache;
             $tache->setUtilisateur($this);
         }
 
@@ -138,8 +126,8 @@ class Utilisateur
 
     public function removeTach(Tache $tache): self
     {
-        if ($this->taches->contains($tache)) {
-            $this->taches->removeElement($tache);
+        if ($this->tache->contains($tache)) {
+            $this->tache->removeElement($tache);
             // set the owning side to null (unless already changed)
             if ($tache->getUtilisateur() === $this) {
                 $tache->setUtilisateur(null);

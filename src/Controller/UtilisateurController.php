@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Utilisateur;
 use App\Form\UtilisateurType;
+use App\Form\TacheType;
 use Symfony\Component\HttpFoundation\Request;
 
 class UtilisateurController extends AbstractController
@@ -40,12 +41,11 @@ class UtilisateurController extends AbstractController
         if($utilisateur != null){
 
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
-               //Analyse la raquette HTTP
                $form->handleRequest($request);
                if($form->isSubmitted() && $form->isValid()){
                    $pdo = $this->getDoctrine()->getManager();
-                   $pdo->persist($utilisateur);    //prepare
-                   $pdo->flush();              //execute
+                   $pdo->persist($utilisateur);    
+                   $pdo->flush();              
                }
 
         return $this->render('utilisateur/utilisateur.html.twig',[
@@ -54,7 +54,6 @@ class UtilisateurController extends AbstractController
         ]);
         }
         else{
-            // Produit n'existe pas, on redirige l'internaute
             return $this->redirectToRoute('accueil');
         }
     }

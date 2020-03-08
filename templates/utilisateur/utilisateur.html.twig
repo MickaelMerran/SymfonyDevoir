@@ -4,8 +4,9 @@
 {% block body %}
     <h1>{{utilisateur.nom}} {{ utilisateur.prenom }}</h1>
     <p>{{ utilisateur.email }}</p>
+    
 
-     {% if tache is not empty %}
+     {% if utilisateur.tache is not empty %}
         <table class="table">
             <thead>
                 <tr>
@@ -16,9 +17,15 @@
                 </tr>
             </thead>
             <tbody>
-                {% for tache in taches %}
+                {% for tache in utilisateur.tache %}
                     <tr>
-                        <td>{{ tache.nom }}</td>
+                        <td>
+                            <a href="{{ path('une_tache',
+                                        {'id':tache.id}) 
+                                }}">
+                                {{ tache.nom }}
+                            </a>
+                        </td>
                          <td>{{tache.getdeadline().format('Y-m-d')}}</td> 
                         <td>
                             {% if tache.etat == false %}
@@ -39,6 +46,7 @@
     {% else %}
         <p>L'utilisateur n'a aucune tache d'assignée </p>
     {% endif %}
+
 
     <h2>Modifier l'utilisateur</h2>
     {{form(form_edit)}}
