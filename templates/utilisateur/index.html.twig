@@ -28,6 +28,7 @@
                         <td>{{ utilisateur.prenom }}</td>
                         <td>{{ utilisateur.email }}</td>
                         <td>{{utilisateur.getdateInscription().format('Y-m-d H:i:s')}}</td>
+                        <td>{{utilisateur.tache.count}}</td>
                         
                     </tr>
                 {% endfor %}
