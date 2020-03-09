@@ -109,7 +109,7 @@ class Utilisateur
     /**
      * @return Collection|Tache[]
      */
-    public function getTache(): Collection
+    public function getTache(): ?Collection
     {
         return $this->tache;
     }
